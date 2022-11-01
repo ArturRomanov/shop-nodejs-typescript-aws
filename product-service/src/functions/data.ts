@@ -38,3 +38,19 @@ export const products: Product[] = [
       title: "ProductName",
     },
 ];
+
+{/*aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80aa" }, "title": { "S": "ProductOne" }, "description": { "S": "Short Product Description1" }, "price": { "N": "24" } }'
+aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a1" }, "title": { "S": "ProductTitle" }, "description": { "S": "Short Product Description7" }, "price": { "N": "15" } }'
+aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a3" }, "title": { "S": "Product" }, "description": { "S": "Short Product Description2" }, "price": { "N": "23" } }'
+aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-48c5-9345-fc73348a80a1" }, "title": { "S": "ProductTest" }, "description": { "S": "Short Product Description4" }, "price": { "N": "15" } }'
+aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-48c5-9445-fc73c48a80a2" }, "title": { "S": "Product2" }, "description": { "S": "Short Product Descriptio1" }, "price": { "N": "23" } }'
+aws dynamodb put-item --table-name products --item '{ "id": { "S": "7567ec4b-b10c-45c5-9345-fc73c48a80a1" }, "title": { "S": "ProductName" }, "description": { "S": "Short Product Description7" }, "price": { "N": "15" } }'
+
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80aa" }, "count": { "N": "197"} }'
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a1" }, "count": { "N": "197"} }'
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-48c5-9345-fc73c48a80a3" }, "count": { "N": "197"} }'
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-48c5-9345-fc73348a80a1" }, "count": { "N": "197"} }'
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-48c5-9445-fc73c48a80a2" }, "count": { "N": "197"} }'
+aws dynamodb put-item --table-name stocks --item '{ "product_id": { "S": "7567ec4b-b10c-45c5-9345-fc73c48a80a1" }, "count": { "N": "197"} }'*/}
+
+
