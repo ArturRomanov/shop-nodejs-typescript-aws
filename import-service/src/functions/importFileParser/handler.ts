@@ -1,8 +1,9 @@
 import { middyfy } from '@libs/lambda';
-import { S3 } from 'aws-sdk';
+import { S3,SQS } from 'aws-sdk';
 import csv from 'csv-parser';
 
 const s3 = new S3();
+const sqs = new SQS();
 
 const BUCKET = 'awsnodejsuploaded';
 
@@ -17,7 +18,15 @@ const importFileParser = async (event) => {
             result.push(data)
         }).on('error', (error) => reject(error)).on('end', () => resolve())
       })
-      console.log(result, 'Result of the file parser');
+      for (const item of result) {
+        const params = {
+          QueueUrl: process.env.SQS_URL,
+          MessageBody: JSON.stringify(item)
+        }
+ 
+        await sqs.sendMessage(params).promise()
+      }
+ 
       return {
         statusCode: 200,
         headers: {
