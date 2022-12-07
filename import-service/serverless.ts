@@ -29,15 +29,6 @@ const serverlessConfiguration: AWS = {
           Resource: [ 
             "arn:aws:s3:::awsnodejsuploaded/*",
           ],
-        }, 
-        {
-          Effect: "Allow",
-          Action: [
-            "sqs:*"
-          ],
-          Resource: [
-            process.env.SQS_ARN
-          ]
         }],
       },
     },

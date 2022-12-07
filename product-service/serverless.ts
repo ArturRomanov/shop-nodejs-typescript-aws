@@ -3,7 +3,6 @@ import type { AWS } from '@serverless/typescript';
 import getProductsList from '@functions/getProductsList';
 import getProductsById from '@functions/getProductsById';
 import createProduct from '@functions/createProduct';
-import catalogBatchProcess from '@functions/catalogBatchProcess';
 
 const serverlessConfiguration: AWS = {
   service: 'product-service',
@@ -20,9 +19,6 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
-      SNS_ARN: {
-        Ref: "SNSTopic"
-      },
     },
     iam: {
       role: {
@@ -41,30 +37,12 @@ const serverlessConfiguration: AWS = {
             "arn:aws:dynamodb:eu-west-1:*:table/products",
             "arn:aws:dynamodb:eu-west-1:*:table/stocks",
           ],
-        }, 
-        {
-          Effect: "Allow",
-          Action: [
-            "sqs:*"
-          ],
-          Resources: [
-            process.env.ARN
-          ]
-        },
-        {
-          Effect: "Allow",
-          Action: [
-            "sns:*"
-          ],
-          Resources: {
-            Ref: "SNSTopic"
-          }
         }],
       },
     },
   },
   // import the function via paths
-  functions: { getProductsList, getProductsById, createProduct, catalogBatchProcess },
+  functions: { getProductsList, getProductsById, createProduct },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -78,32 +56,6 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
   },
-  resources: {
-    Resources: {
-      NewSQSQueue: {
-        Type: "AWS::SQS::Queue",
-        Properties: {
-          QueueName: "catalogItemsQueue"
-        }
-      },
-      SNSTopic: {
-        Type: "AWS::SNS::Topic",
-        Properties: {
-          TopicName: "createProductTopic"
-        }
-      },
-      SNSSubscription: {
-        Type: "AWS::SNS::Subscription",
-        Properties: {
-          Endpoint: process.env.EMAIL,
-          Protocol: "email",
-          TopicArn: {
-            Ref: "SNSTopic"
-          }
-        }
-      }
-    }
-  }
 };
 
 module.exports = serverlessConfiguration;
